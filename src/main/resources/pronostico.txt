@@ -1,0 +1,3 @@
+1 Argentina GANA_EQUIPO_1 Nigeria
+2 Polonia GANA_EQUIPO_2 Australia
+3 Belgica EMPATE Inglaterra  

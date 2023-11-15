@@ -26,10 +26,14 @@ public class Ronda {
 
 
 	
+	public List<Partido> getPartidosEnLaRonda() {
+		return partidosEnLaRonda;
+	}
+
+
 	public static List<Ronda> getListadoRondas() {
 		return listadoRondas;
 	}
-	
 	
 	
 	public static Ronda getRondaPorNumero(int numeroRonda) {
@@ -42,7 +46,7 @@ public class Ronda {
 	
 	public void agregarPartidoRonda(Partido partido) {
 		partidosEnLaRonda.add(partido);
-		System.out.println("El partido de: " + partido.getEquipo1().getNombre() + " vs " + partido.getEquipo2().getNombre() + " a sido agregado a la ronda " + this.numeroRonda);
+		//System.out.println("El partido de: " + partido.getEquipo1().getNombre() + " vs " + partido.getEquipo2().getNombre() + " a sido agregado a la ronda " + this.numeroRonda);
 	}
 	
 	
