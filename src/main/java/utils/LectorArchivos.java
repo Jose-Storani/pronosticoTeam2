@@ -14,6 +14,7 @@ public class LectorArchivos {
 		try (BufferedReader br = new BufferedReader(new FileReader(archivoParaLeer))) {
 
 			String linea;
+			
 			while ((linea = br.readLine()) != null) {
 				String[] partes = linea.split(" ");
 
@@ -43,10 +44,6 @@ public class LectorArchivos {
 					//[3] Equipo2
 					
 					Pronostico pronostico = new Pronostico(Integer.parseInt(partes[0]), partes[2]);
-					
-					
-					
-					
 					
 
 				}
