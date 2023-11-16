@@ -1,3 +1,5 @@
 1 Argentina 2 Nigeria 1
 1 Polonia 0 Australia 0
 1 Belgica 2 Inglaterra 3
+1 Alemania 3 Francia 2
+1 Arabia_Saudita 2 Brasil 2 
