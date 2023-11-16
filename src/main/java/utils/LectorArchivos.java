@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import equipo.Equipo;
 import partido.Partido;
+import persona.Participante;
 import pronostico.Pronostico;
 import ronda.Ronda;
 
@@ -53,16 +54,28 @@ public class LectorArchivos {
 						// [2] Equipo1
 						// [3] Resultado Propuesto
 						// [4]Equipo2
-
-						Pronostico pronostico = new Pronostico(Integer.parseInt(partes[1]), partes[3]);
+						
+						//si el participante ya existe dentro de la lista, no se instancia, solo se devuelve el ya instanciado previamente.
+						Participante participante = Participante.agregarParticipante(partes[0]);
+						
+						
+						Pronostico pronostico = new Pronostico(Integer.parseInt(partes[1]), partes[3],participante);
+		
+						
+						//se agrega a la lista de cada participante, el pronostico correspondiente.
+						participante.agregarPronosticoParticipante(pronostico);
+						
 
 					}
+					
 
 				} else {
 					System.out.println("Linea mal formateada: " + linea);
 				}
 
 			}
+			
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
