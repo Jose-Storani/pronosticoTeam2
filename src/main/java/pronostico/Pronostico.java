@@ -23,6 +23,7 @@ public class Pronostico {
 		if(this.partido.getResultado() == this.resultadoPropuesto) {
 			participante.setPuntosDelParticipante(valorDelAcierto);
 			participante.setCantidadAciertos(1);
+			
 		}
 
 	}

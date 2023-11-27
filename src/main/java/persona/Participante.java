@@ -3,8 +3,11 @@ package persona;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 import pronostico.Pronostico;
-
+@Getter
+@Setter
 public class Participante {
 	private static int contadorId = 0;
 	private String nombre;
@@ -50,37 +53,12 @@ public class Participante {
 		}
 	}
 
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public int getParticipanteId() {
-		return participanteId;
-	}
-
-	public void setParticipanteId(int participanteId) {
-		this.participanteId = participanteId;
-	}
 	
-	
-	public int getPuntosDelParticipante() {
-		return puntosDelParticipante;
-	}
 
 	public void setPuntosDelParticipante(int puntosDelParticipante) {
 		this.puntosDelParticipante += puntosDelParticipante;
 	}
 	
-	
-
-	public int getCantidadAciertos() {
-		return cantidadAciertos;
-	}
-
 	public void setCantidadAciertos(int cantidadAciertos) {
 		this.cantidadAciertos += cantidadAciertos;
 	}

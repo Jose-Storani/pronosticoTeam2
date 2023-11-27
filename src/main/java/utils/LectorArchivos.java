@@ -31,9 +31,9 @@ public class LectorArchivos {
 					if (archivoParaLeer.equals("src/main/resources/resultadoPartidos.csv")) {
 						//
 						// [0] Numero de Ronda
-						// [1] Equipo1
+						// [1] Nombre del Equipo1
 						// [2] GolesEquipo1
-						// [3] Equipo2
+						// [3] Nombre del Equipo2
 						// [4] GolesEquipo2
 
 						Partido partido = new Partido(Equipo.buscarEquipoPorNombre(partes[1]),
