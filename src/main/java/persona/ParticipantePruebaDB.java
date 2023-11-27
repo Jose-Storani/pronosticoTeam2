@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import dao.participante.participanteManagerDB;
 public class ParticipantePruebaDB {
-	private participanteManagerDB manager = new participanteManagerDB("Participante");
+	private participanteManagerDB manager = new participanteManagerDB("participante");
 	
 	public void mostrarParticipantes() throws SQLException {
 		ResultSet participantes = manager.getAll();
@@ -20,5 +20,19 @@ public class ParticipantePruebaDB {
 		
 			System.out.println("--------------------------------------");
 		}
+		
+	}
+	
+	public void mostrarParticipantePorID(int id) throws SQLException {
+		ResultSet participante = manager.getById(id);
+		while(participante.next()) {
+			String name = participante.getString("nombre");
+			String email = participante.getString("email");
+			
+			System.out.println(name);
+			System.out.println(email);
+		}
+		
+		
 	}
 }

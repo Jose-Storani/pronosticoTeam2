@@ -15,9 +15,10 @@ public class Initializer {
 		//Participante.detallarPuntajesPorJugador();
 		
 		DataBaseConnection.establecerConexion();
+		
 		ParticipantePruebaDB participantes = new ParticipantePruebaDB();
 		try {
-			participantes.mostrarParticipantes();
+			participantes.mostrarParticipantePorID(1);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
