@@ -1,36 +1,83 @@
 package persona;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.participante.ParticipanteManagerDB;
 import lombok.Getter;
 import lombok.Setter;
 import pronostico.Pronostico;
 @Getter
 @Setter
 public class Participante {
-	private static int contadorId = 0;
+	private static ParticipanteManagerDB manager = new ParticipanteManagerDB("participante");
 	private String nombre;
 	private int participanteId;
+	private String email;
 	private int puntosDelParticipante = 0;
 	private int cantidadAciertos = 0;
 	public static List<Participante> listadoParticipantes = new ArrayList<>();
 	private List<Pronostico> listadoDePronosticosParticipante = new ArrayList<>();
 	
-	public Participante(String nombre) {
+	public Participante(int id, String nombre, String email) {
 		this.nombre = nombre;
-		this.participanteId = ++contadorId;
+		this.participanteId = id;
+		this.email = email;
 		
 	}
 	
-	//el nombre de usuario va a ser UNICO.
-	public static Participante agregarParticipante(String nombre) {
+	
+	//busca participante por id dentro del listado
+	public static Participante buscarParticipantePorId(int idParticipante) {
 		for(Participante participante: listadoParticipantes) {
-			if(participante.nombre.equals(nombre)) {
+			if(participante.getParticipanteId() == idParticipante) {
+				return participante;
+			}
+		}
+		return null;
+	}
+	
+	//carga de participantes
+	public static void cargarParticipantes() throws SQLException {
+		ResultSet participantes = manager.getAll();
+			while(participantes.next()) {
+				int id = participantes.getInt("id");
+				String nombre = participantes.getString("nombre");
+				String email = participantes.getString("email");
+				agregarParticipante(id, nombre, email);
+				
+			}
+			if(!listadoParticipantes.isEmpty()) {
+				System.out.println("Carga de Participantes Exitosa");
+				
+			}
+			else {
+				System.err.println("Fallo en la carga de Participantes de la BD");
+			}
+			
+		
+		
+	}
+	
+	public static void mostrarParticipantes() {
+		for(Participante participante : listadoParticipantes) {
+			System.out.println("ID: " + participante.getParticipanteId());
+			System.out.println("Nombre: " + participante.getNombre());
+			System.out.println("Email: " + participante.getEmail());
+			System.out.println("---------------------------------");
+		}
+	}
+	
+	
+	public static Participante agregarParticipante(int id,String nombre, String email) {
+		for(Participante participante: listadoParticipantes) {
+			if(participante.participanteId == id) {
 				return participante;
 			}
 			}
-		Participante nuevoParticipante = new Participante(nombre);
+		Participante nuevoParticipante = new Participante(id, nombre,email);
 		listadoParticipantes.add(nuevoParticipante);
 		return nuevoParticipante;
 	}
@@ -62,6 +109,8 @@ public class Participante {
 	public void setCantidadAciertos(int cantidadAciertos) {
 		this.cantidadAciertos += cantidadAciertos;
 	}
+	
+	
 
 	@Override
 	public String toString() {

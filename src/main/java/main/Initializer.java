@@ -3,9 +3,13 @@ package main;
 import java.sql.SQLException;
 
 import dao.DataBaseConnection;
+import dao.participante.ParticipanteManagerDB;
+import dao.partido.PartidoManagerDB;
 import persona.Participante;
-import persona.ParticipantePruebaDB;
+import ronda.Ronda;
+import utils.DataLoader;
 import utils.LectorArchivos;
+import utils.MenuInicial;
 
 public class Initializer {
 
@@ -15,15 +19,13 @@ public class Initializer {
 		//Participante.detallarPuntajesPorJugador();
 		
 		DataBaseConnection.establecerConexion();
+//		DataLoader.cargarDatosDesdeDB();
+//		Ronda.mostrarPartidosPorRonda(1);
+		MenuInicial.mostrarMenuInicial();
 		
-		ParticipantePruebaDB participantes = new ParticipantePruebaDB();
-		try {
-			participantes.mostrarParticipantePorID(1);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+		
+		
 }
 
 
+}

@@ -1,13 +1,17 @@
 package partido;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.partido.PartidoManagerDB;
 import equipo.Equipo;
 import utils.posiblesResultados;
 
 public class Partido {
-	private static int contadorId =0;
+	
+	private static PartidoManagerDB manager = new PartidoManagerDB("partido");
 	private Equipo equipo1;
 	private Equipo equipo2;
 	private int golesEquipo1;
@@ -18,14 +22,36 @@ public class Partido {
 	
 	
 	
-	public Partido(Equipo equipo1,int golesEquipo1,Equipo equipo2, int golesEquipo2) {
+	public Partido(int id, Equipo equipo1,int golesEquipo1,Equipo equipo2, int golesEquipo2) {
 		this.equipo1 = equipo1;
 		this.equipo2 = equipo2;
 		this.golesEquipo1 = golesEquipo1;
 		this.golesEquipo2 = golesEquipo2;
-		this.partidoId = ++contadorId;
+		this.partidoId = id;
 		this.establecerResultadoPartido(this.partidoId);
 		
+	}
+	
+	public static void cargarPartidos() throws SQLException {
+		ResultSet partidos = manager.getAll();
+		
+			while(partidos.next()) {
+				int partidoId = partidos.getInt("partido_id");
+				int golesEquipo1 = partidos.getInt("goles_equipo_1");
+				int golesEquipo2 = partidos.getInt("goles_equipo_2");
+				Equipo equipo1 = Equipo.buscarEquipoPorId(partidos.getInt("equipo1_id"));
+				Equipo equipo2 = Equipo.buscarEquipoPorId(partidos.getInt("equipo2_id"));
+				instanciarPartido(partidoId, equipo1, golesEquipo1, equipo2, golesEquipo2);
+				
+				
+			}
+			if(!listadoPartidos.isEmpty()) {
+				System.out.println("Carga de Partidos exitosa");
+			}
+			else {
+				System.err.println("Falla en la carga de equipos desde DB");
+			}
+			
 	}
 	
 	public static Partido buscarPartidoPorId(int partidoId) {
@@ -39,15 +65,24 @@ public class Partido {
 		return null;
 	}
 	
+	public static Partido instanciarPartido(int id, Equipo equipo1,int golesEquipo1,Equipo equipo2, int golesEquipo2) {
+		for(Partido partido : listadoPartidos) {
+			if(partido.partidoId == id) continue;
+		}
+		Partido nuevoPartido = new Partido(id,equipo1,golesEquipo1,equipo2,golesEquipo2);
+		listadoPartidos.add(nuevoPartido);
+		return nuevoPartido;
+	}
+	
 	
 	public posiblesResultados establecerResultadoPartido(int partidoId) {
 		if(this.golesEquipo1 > this.golesEquipo2) {
-			this.resultado = posiblesResultados.GANA_EQUIPO_1;
+			this.resultado = posiblesResultados.GANA1;
 			//System.out.println(this.equipo1.getNombre() + " venció a " + this.equipo2.getNombre() + " " + this.golesEquipo1 + " a " + this.golesEquipo2);
 			return resultado;
 		}
 		else if(this.golesEquipo1 < this.golesEquipo2) {
-			this.resultado = posiblesResultados.GANA_EQUIPO_2;
+			this.resultado = posiblesResultados.GANA2;
 			//System.out.println(this.equipo2.getNombre() + " venció a " + this.equipo1.getNombre() + " " + this.golesEquipo2 + " a " + this.golesEquipo1);
 			return resultado;
 		}
@@ -58,6 +93,11 @@ public class Partido {
 		}
 	}
 
+	public static void mostrarPartidosConsola() {
+		for(Partido partido: listadoPartidos) {
+			System.out.println("Equipos: " + partido.getEquipo1().getNombre() + " vs " + partido.getEquipo2().getNombre() );
+		}
+	}
 	
 
 	public Equipo getEquipo1() {
