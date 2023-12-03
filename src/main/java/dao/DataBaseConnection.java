@@ -18,14 +18,26 @@ static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	//instancia de la conexion
 	public static Connection conexionDB;
 	
-	public static void establecerConexion() {
-		System.out.println("Conectando a la base de datos...");
+	public static Connection establecerConexion() {
 		try {
 			DataBaseConnection.conexionDB = DriverManager.getConnection(DataBaseConnection.DB_URL,DataBaseConnection.USER,DataBaseConnection.PASSWORD);
-			System.out.println("Conexión Exitosa");
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return conexionDB;
 	}
+	
+	public static void cerrarConexion() {
+	    try {
+	        if (conexionDB != null && !conexionDB.isClosed()) {
+	            conexionDB.close();
+	            System.out.println("Conexión cerrada");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
 }

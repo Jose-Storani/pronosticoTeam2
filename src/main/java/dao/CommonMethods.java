@@ -17,10 +17,12 @@ public abstract class CommonMethods {
 	}
 	
 	public ResultSet getAll() throws SQLException {
-		String sql = "SELECT * FROM " + this.getNombreTabla().trim().toUpperCase();
-		ResultSet resultado = consulta.executeQuery(sql);
-		return resultado;
+	    String sql = "SELECT * FROM " + this.getNombreTabla().trim().toUpperCase();
+	    ResultSet resultado = consulta.executeQuery(sql);
+	    return resultado;
+	    
 	}
+
 	
 	public abstract ResultSet getById(int id) throws SQLException;
 		
@@ -33,6 +35,19 @@ public abstract class CommonMethods {
 	public void setNombreTabla(String nombreTabla) {
 		this.nombreTabla = nombreTabla;
 	}
+	
+	public void cerrarConsulta() {
+	    try {
+	        if (consulta != null && !consulta.isClosed()) {
+	            consulta.close();
+	        }
+	    } catch (SQLException e) {
+	        // Manejo de excepciones al cerrar el Statement
+	        e.printStackTrace();
+	    }
+	}
+	
+	
 	
 		
 	

@@ -1,4 +1,4 @@
-package partido;
+package entidades;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.partido.PartidoManagerDB;
-import equipo.Equipo;
 import utils.posiblesResultados;
 
 public class Partido {
@@ -20,8 +19,6 @@ public class Partido {
 	private posiblesResultados resultado;
 	public static List<Partido> listadoPartidos = new ArrayList<>();
 	
-	
-	
 	public Partido(int id, Equipo equipo1,int golesEquipo1,Equipo equipo2, int golesEquipo2) {
 		this.equipo1 = equipo1;
 		this.equipo2 = equipo2;
@@ -29,12 +26,10 @@ public class Partido {
 		this.golesEquipo2 = golesEquipo2;
 		this.partidoId = id;
 		this.establecerResultadoPartido(this.partidoId);
-		
 	}
 	
 	public static void cargarPartidos() throws SQLException {
-		ResultSet partidos = manager.getAll();
-		
+		try(ResultSet partidos = manager.getAll()){
 			while(partidos.next()) {
 				int partidoId = partidos.getInt("partido_id");
 				int golesEquipo1 = partidos.getInt("goles_equipo_1");
@@ -45,12 +40,18 @@ public class Partido {
 				
 				
 			}
+			manager.cerrarConsulta();
 			if(!listadoPartidos.isEmpty()) {
 				System.out.println("Carga de Partidos exitosa");
 			}
 			else {
 				System.err.println("Falla en la carga de equipos desde DB");
 			}
+			
+		}
+		;
+		
+			
 			
 	}
 	
@@ -67,7 +68,7 @@ public class Partido {
 	
 	public static Partido instanciarPartido(int id, Equipo equipo1,int golesEquipo1,Equipo equipo2, int golesEquipo2) {
 		for(Partido partido : listadoPartidos) {
-			if(partido.partidoId == id) continue;
+			if(partido.partidoId == id) return partido;
 		}
 		Partido nuevoPartido = new Partido(id,equipo1,golesEquipo1,equipo2,golesEquipo2);
 		listadoPartidos.add(nuevoPartido);
@@ -98,6 +99,8 @@ public class Partido {
 			System.out.println("Equipos: " + partido.getEquipo1().getNombre() + " vs " + partido.getEquipo2().getNombre() );
 		}
 	}
+	
+	
 	
 
 	public Equipo getEquipo1() {

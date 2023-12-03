@@ -1,4 +1,4 @@
-package pronostico;
+package entidades;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,19 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.pronostico.PronosticoManagerDB;
-import partido.Partido;
-import persona.Participante;
+import lombok.Getter;
+import lombok.Setter;
 import utils.posiblesResultados;
-
+@Getter
+@Setter
 public class Pronostico {
 	private static PronosticoManagerDB manager = new PronosticoManagerDB("pronostico");
-	static private int valorDelAcierto = 1;
+	//static private int valorDelAcierto = 1; //consultarlo en la BD
 	private Participante participante;
-	//private static int puntos;
 	private Partido partido;
 	private int pronosticoId;
 	private posiblesResultados resultadoPropuesto;
-	private static List<Pronostico> listadoPronosticos = new ArrayList<>();
+	public static List<Pronostico> listadoPronosticos = new ArrayList<>();
 	
 	public Pronostico(int partidoId, String resultadoPropuesto, Participante participante,int pronosticoId) {
 		this.partido = Partido.buscarPartidoPorId(partidoId);
@@ -29,18 +29,9 @@ public class Pronostico {
 		
 	}
 	
-	private void determinarPuntos() {
-		if(this.partido.getResultado() == this.resultadoPropuesto) {
-			participante.setPuntosDelParticipante(valorDelAcierto);
-			participante.setCantidadAciertos(1);
-			
-		}
 
-	}
-	
 	public static void cargarPronosticos() throws SQLException {
 		ResultSet pronosticos = manager.getAll();
-		if(pronosticos.next()) {
 			while(pronosticos.next()) {
 				int pronosticoId = pronosticos.getInt("id");
 				int partidoId = pronosticos.getInt("partido_id");
@@ -49,8 +40,10 @@ public class Pronostico {
 				instanciarPronosticos(partidoId, resultadoPropuesto, Participante.buscarParticipantePorId(participanteId), pronosticoId);
 				
 			}
-			System.out.println("Carga de Pronosticos Exitosa");
-		}
+			manager.cerrarConsulta();
+			if(!listadoPronosticos.isEmpty()) {
+				System.out.println("Carga de Pronosticos Exitosa");
+			}
 		else {
 			System.err.println("Fallo en la carga desde la BD de Pronosticos");
 		}
@@ -75,6 +68,7 @@ public class Pronostico {
 		}
 		Pronostico nuevoPronostico = new Pronostico(partidoId,resultadoPropuesto,participante,pronosticoId);
 		listadoPronosticos.add(nuevoPronostico);
+		participante.agregarPronosticoParticipante(nuevoPronostico);
 		return nuevoPronostico;
 	}
 	

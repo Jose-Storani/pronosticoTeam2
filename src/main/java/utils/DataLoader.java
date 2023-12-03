@@ -2,12 +2,12 @@ package utils;
 
 import java.sql.SQLException;
 
-
-import equipo.Equipo;
-import partido.Partido;
-import persona.Participante;
-import pronostico.Pronostico;
-import ronda.Ronda;
+import dao.DataBaseConnection;
+import entidades.Equipo;
+import entidades.Participante;
+import entidades.Partido;
+import entidades.Pronostico;
+import entidades.Ronda;
 
 public class DataLoader {
 	public static void cargarDatosDesdeDB() {
@@ -18,19 +18,13 @@ public class DataLoader {
 			Partido.cargarPartidos();
 			Pronostico.cargarPronosticos();
 			Ronda.cargarRondas();
+			DataBaseConnection.cerrarConexion();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
-	
-	public static void mostrarInformacionDeTabla() {
-		Partido.mostrarPartidosConsola();
-		Participante.mostrarParticipantes();
-		//Pronostico.mostrarPronosticos();
-		//Equipo.mostrarEquipos();
-	}
-	
-	
-}
+
+};
+

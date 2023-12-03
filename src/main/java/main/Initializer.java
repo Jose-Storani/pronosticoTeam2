@@ -5,11 +5,10 @@ import java.sql.SQLException;
 import dao.DataBaseConnection;
 import dao.participante.ParticipanteManagerDB;
 import dao.partido.PartidoManagerDB;
-import persona.Participante;
-import ronda.Ronda;
+import entidades.Participante;
+import entidades.Ronda;
 import utils.DataLoader;
-import utils.LectorArchivos;
-import utils.MenuInicial;
+import view.MenuInicial;
 
 public class Initializer {
 

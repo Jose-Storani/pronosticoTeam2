@@ -1,4 +1,4 @@
-package equipo;
+package entidades;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,8 +20,7 @@ public class Equipo {
 	
 	
 	public static void cargarEquipos() throws SQLException {
-		ResultSet equipos = manager.getAll();
-		
+		try(ResultSet equipos = manager.getAll()){
 			while(equipos.next()) {
 				int id = equipos.getInt("equipo_id");
 				String nombre = equipos.getString("nombre");
@@ -32,6 +31,10 @@ public class Equipo {
 			}
 			
 		else System.err.println("Fallo en la carga desde la BD de Equipos");
+			
+		}
+		
+			
 		
 	}
 	public String getNombre() {
