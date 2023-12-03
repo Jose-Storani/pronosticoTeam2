@@ -27,7 +27,7 @@ public class Equipo {
 				instanciarEquipo(nombre, id);
 			}
 			if(!listaEquipos.isEmpty()) {
-				System.out.println("Carga de Equipos Exitosa");
+				//System.out.println("Carga de Equipos Exitosa");
 			}
 			
 		else System.err.println("Fallo en la carga desde la BD de Equipos");

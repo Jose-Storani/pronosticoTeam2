@@ -42,7 +42,7 @@ public class Partido {
 			}
 			manager.cerrarConsulta();
 			if(!listadoPartidos.isEmpty()) {
-				System.out.println("Carga de Partidos exitosa");
+				//System.out.println("Carga de Partidos exitosa");
 			}
 			else {
 				System.err.println("Falla en la carga de equipos desde DB");

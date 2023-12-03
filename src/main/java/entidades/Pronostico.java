@@ -42,7 +42,7 @@ public class Pronostico {
 			}
 			manager.cerrarConsulta();
 			if(!listadoPronosticos.isEmpty()) {
-				System.out.println("Carga de Pronosticos Exitosa");
+				//System.out.println("Carga de Pronosticos Exitosa");
 			}
 		else {
 			System.err.println("Fallo en la carga desde la BD de Pronosticos");

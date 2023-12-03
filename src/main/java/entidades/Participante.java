@@ -42,7 +42,7 @@ public class Participante {
 			manager.cerrarConsulta();
 
 			if (!listadoParticipantes.isEmpty()) {
-				System.out.println("Carga de Participantes Exitosa");
+				//System.out.println("Carga de Participantes Exitosa");
 
 			} else {
 				System.err.println("Fallo en la carga de Participantes de la BD");

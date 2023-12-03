@@ -31,7 +31,7 @@ public class Ronda {
 			manager.cerrarConsulta();
 
 			if (!listadoRondas.isEmpty()) {
-				System.out.println("Carga de Rondas exitosa");
+				//System.out.println("Carga de Rondas exitosa");
 			} else {
 				System.err.println("Fallo en la carga de rondas desde DB");
 			}

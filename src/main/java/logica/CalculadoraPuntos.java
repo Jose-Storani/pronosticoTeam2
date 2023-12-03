@@ -46,7 +46,7 @@ public class CalculadoraPuntos {
 			participante.setCantidadAciertos(1);
 			participante.setContadorRacha(participante.getContadorRacha() + 1);
 			if(participante.getContadorRacha() >= 3) {
-				System.out.println("RACHA DE ACIERTOS: " + participante.getContadorRacha() );
+				System.out.println(participante.getNombre() + " lleva una racha de " + participante.getContadorRacha() + " aciertos");
 				participante.setPuntosDelParticipante(valorPuntoExtra);
 			}
 		}

@@ -33,7 +33,7 @@ static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	    try {
 	        if (conexionDB != null && !conexionDB.isClosed()) {
 	            conexionDB.close();
-	            System.out.println("Conexión cerrada");
+	            //System.out.println("Conexión cerrada");
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();

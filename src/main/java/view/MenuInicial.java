@@ -3,7 +3,6 @@ package view;
 import java.util.Scanner;
 
 import entidades.Participante;
-import entidades.Partido;
 import entidades.Ronda;
 import logica.CalculadoraPuntos;
 import logica.Configuracion;
@@ -15,7 +14,6 @@ public class MenuInicial {
 	public static void mostrarMenuInicial() {
 		Scanner scanner = new Scanner(System.in);
 		boolean salir = false;
-		char respuesta;
 		char seleccion;
 
 		System.out.println(
@@ -30,51 +28,39 @@ public class MenuInicial {
 		if (seleccion == 's' || seleccion == 'S') {
 			mostrarMenuConfiguracion(scanner);
 		}
+		
+		DataLoader.cargarDatosDesdeDB();
 
 		while (!salir) {
 			System.out.println("Menu Principal:");
-			if (!dataCargada) {
-				System.out.println("1) Cargar datos desde la base de datos");
-			}
-			;
-			System.out.println("2) Mostrar datos");
-			System.out.println("3) Configurar sistema de aciertos");
-			System.out.println("4) Calcular Puntajes");
-			System.out.println("5) Salir");
+				System.out.println("1) Mostrar datos");
+			System.out.println("2) Configurar sistema de aciertos ");
+			System.out.println("3) Calcular Puntajes ");
+			System.out.println("4) Salir ");
+			
 
-			int opcion = leerOpcion(scanner, 5);
+			int opcion = leerOpcion(scanner, 4);
 
 			switch (opcion) {
 			case 1:
-				if (!dataCargada) {
-					// Lógica para cargar datos desde la base de datos
-					DataLoader.cargarDatosDesdeDB();
-					dataCargada = true;
-					
-
-				} else {
-					System.out.println("¡Los datos ya han sido cargados!");
-				}
+				mostrarMenuDatos(scanner);
 
 				break;
 
 			case 2:
-				mostrarMenuDatos(scanner);
-				
-				break;
-
-			case 3:
 				mostrarMenuConfiguracion(scanner);
 				
 				break;
 
-			case 4:
+			case 3:
 				CalculadoraPuntos.calcularPuntos();
+				
 				break;
 
-			case 5:
+			case 4:
 				salir = true;
 				break;
+
 			}
 			//salir = finalizarSeccion(scanner);
 			
