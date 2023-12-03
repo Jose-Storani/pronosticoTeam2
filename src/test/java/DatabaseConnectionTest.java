@@ -41,7 +41,7 @@ public class DatabaseConnectionTest {
 	    }
 	    
 	    @Test
-	    public void testConsultaParticipantesPorId() {
+	    public void testConsultaParticipantesPorEmail() {
 	        
 	        String consulta = "SELECT * FROM Participante where email = ?";
 	        
@@ -69,5 +69,7 @@ public class DatabaseConnectionTest {
 	            fail("Error al ejecutar la consulta: " + e.getMessage());
 	        }
 	    }
+	    
+	 
 
 }

@@ -112,7 +112,7 @@ public class MenuInicial {
 				break;
 
 			case 'd':
-				Participante.detallarPuntajesPorJugador();
+				CalculadoraPuntos.mostrarPuntosPorConsola();
 				break;
 
 			case 'e':
@@ -134,11 +134,11 @@ public class MenuInicial {
 
 			switch (opcionConfiguracion) {
 			case 'a':
-				// logica para valor del acierto
+			
 				Configuracion.configurarAciertos(scanner);
 				break;
 			case 'b':
-				// logica para valor puntaje extra por racha
+				Configuracion.configurarPuntajeExtra(scanner);
 				break;
 			case 'c':
 				volverMenuPrincipal = true;
@@ -183,23 +183,23 @@ public class MenuInicial {
 		return opcion;
 	}
 	
-private static boolean finalizarSeccion(Scanner scanner) {
-	char respuesta;
-	do {
-		System.out.println("¿Desea continuar? (S/N)");
-		respuesta = scanner.next().charAt(0);
-		if (respuesta != 'S' && respuesta != 's' && respuesta != 'N' && respuesta != 'n') {
-			System.out.println("La opción ingresada no es correcta");
-		}
-
-	} while (respuesta != 'S' && respuesta != 's' && respuesta != 'N' && respuesta != 'n');
-
-	if (respuesta == 'N' || respuesta == 'n') {
-		return true;
-	}
-	return false;
-
-}
+//private static boolean finalizarSeccion(Scanner scanner) {
+//	char respuesta;
+//	do {
+//		System.out.println("¿Desea continuar? (S/N)");
+//		respuesta = scanner.next().charAt(0);
+//		if (respuesta != 'S' && respuesta != 's' && respuesta != 'N' && respuesta != 'n') {
+//			System.out.println("La opción ingresada no es correcta");
+//		}
+//
+//	} while (respuesta != 'S' && respuesta != 's' && respuesta != 'N' && respuesta != 'n');
+//
+//	if (respuesta == 'N' || respuesta == 'n') {
+//		return true;
+//	}
+//	return false;
+//
+//}
 	};
 
 	

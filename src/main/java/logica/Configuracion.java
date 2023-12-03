@@ -13,7 +13,10 @@ public class Configuracion {
 		}
 		
 		public static void configurarPuntajeExtra(Scanner scanner) {
-			
+			System.out.println("Ingrese el valor del punto extra que desea establecer");
+			int valor = validacionValorAcierto(scanner);
+			CalculadoraPuntos.setValorPuntoExtra(valor);
+			System.out.println("Se ha establecido el valor de los puntos extra en: " + valor);
 		};
 		
 		private static int validacionValorAcierto(Scanner scanner) {

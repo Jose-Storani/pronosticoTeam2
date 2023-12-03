@@ -18,6 +18,7 @@ public class Participante {
 	private String email;
 	private int puntosDelParticipante = 0;
 	private int cantidadAciertos = 0;
+	private int contadorRacha = 0;
 	public static List<Participante> listadoParticipantes = new ArrayList<>();
 	private List<Pronostico> listadoDePronosticosParticipante = new ArrayList<>();
 
@@ -99,13 +100,6 @@ public class Participante {
 		return detallePronostico;
 	}
 
-	public static void detallarPuntajesPorJugador() {
-		for (Participante participante : listadoParticipantes) {
-			System.out.println(
-					"El usuario " + participante.getNombre() + " obtuvo: " + participante.getPuntosDelParticipante()
-							+ " puntos" + " con un total de: " + participante.getCantidadAciertos() + " aciertos");
-		}
-	}
 
 	public void setPuntosDelParticipante(int puntosDelParticipante) {
 		this.puntosDelParticipante += puntosDelParticipante;
